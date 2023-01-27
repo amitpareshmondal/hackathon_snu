@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const PORT = 5000;
 const db = require("./db");
 const router = require("./routes");
+const warehouseRoutes =  require("./routes/WarehouseRoute.js")
+const ProductsWarehouseRoutes =  require("./routes/ProductsWarehouseRoutes.js")
+
 
 //database connection
 
@@ -25,6 +28,8 @@ app.use((req, res, next) => {
 //routes
 
 app.use("/api", router);
+app.use("/warehouse", warehouseRoutes);
+app.use("/warehouseProducts", ProductsWarehouseRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "/../uploads")));
 app.use(express.static(path.join(__dirname, "/../frontend/build")));

@@ -4,10 +4,13 @@ const WarehouseSchema = new mongoose.Schema({
   CurrentVolume:Number,
   Country: String,
   MaxVolume: Number,
-  Products:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "products",
-  },
+  diffProducts:[
+    {
+    Products:string,
+  quantity:Number,
+  volume:Number
+
+}],
   BusinessID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "business"
