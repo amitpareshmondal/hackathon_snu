@@ -5,10 +5,6 @@ const app = express();
 const PORT = 5000;
 const db = require("./db");
 const router = require("./routes");
-const warehouseRoutes =  require("./routes/Warehouse.js")
-const ProductsWarehouseRoutes =  require("./routes/Products.js")
-const shipmentsRoutes =  require("./routes/Shipments.js")
-
 
 //database connection
 
@@ -28,9 +24,6 @@ app.use((req, res, next) => {
 //routes
 
 app.use("/api", router);
-app.use("/warehouses", warehouseRoutes);
-app.use("/products", ProductsWarehouseRoutes);
-app.use("/shipments", shipmentsRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "/../uploads")));
 app.use(express.static(path.join(__dirname, "/../frontend/build")));
