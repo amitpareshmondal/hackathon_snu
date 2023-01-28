@@ -5,7 +5,7 @@ function Widget(){
     return(
        <div className="widget">
 <div className="widget__header">
-    <h5>Questions</h5>
+    <h5>Menu</h5>
 </div>
 <div className="widget__contents">
     <WidgetContent/>

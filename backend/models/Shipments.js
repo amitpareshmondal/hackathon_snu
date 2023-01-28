@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const ShipmentsSchema = new mongoose.Schema({
   Source: String,
   Destination: String,
-  Price:Number,
+  TentativePrice:Number,
+  FinalPrice:Number,
   SenderID:String,
   reciverID:String,
+  approval:Number,
   createdAt: {
     type: Date,
     default: Date.now(),

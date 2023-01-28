@@ -7,6 +7,7 @@ const db = require("./db");
 const router = require("./routes");
 const warehouseRoutes =  require("./routes/Warehouse.js")
 const ProductsWarehouseRoutes =  require("./routes/Products.js")
+const shipmentsRoutes =  require("./routes/shipmentRoute.js")
 
 
 //database connection
@@ -28,7 +29,7 @@ app.use((req, res, next) => {
 
 app.use("/api", router);
 app.use("/warehouse", warehouseRoutes);
-app.use("/product", ProductsWarehouseRoutes);
+app.use("/warehouseProducts", ProductsWarehouseRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "/../uploads")));
 app.use(express.static(path.join(__dirname, "/../frontend/build")));

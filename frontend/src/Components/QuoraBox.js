@@ -8,10 +8,10 @@ function QuoraBox(){
  return(   
  <div className="quoraBox">
 <div className="quoraBox__info">
-    <Avatar src={user?.photo}/>
+    {/* <Avatar src={user?.photo}/> */}
 </div>
 <div className="quoraBox__quora">
-    <h5>What is your question</h5>
+    <h2>Warehouses</h2>
 </div>
     </div>
 )}
