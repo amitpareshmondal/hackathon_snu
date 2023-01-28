@@ -5,7 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import TimeAgo from 'javascript-time-ago'
 import {Provider} from "react-redux";
-import en from 'javascript-time-ago/locale/en.json'
+import Shipment from './Components/Shipment';
+import en from 'javascript-time-ago/locale/en.json';
+import CheckoutPage from './Components/Checkout';
+import BuisCheckoutPage from './Components/Business';
 // import ru from 'javascript-time-ago/locale/ru.json'
 import store from "./app/store";
 TimeAgo.addDefaultLocale(en);
@@ -14,7 +17,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      {/* <CheckoutPage/> */}
+      {/* <BuisCheckoutPage/> */}
     <App />
+    {/* <Shipment/> */}
     </Provider>
   
   </React.StrictMode>
