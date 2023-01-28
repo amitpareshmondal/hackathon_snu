@@ -28,36 +28,37 @@ function LastSeen({ Date }) {
 
 function Post(props){
     const user = useSelector(selectUser);
-    const handleQuill=(value)=>{
-        SetAnswer(value);
-        console.log(value);
+    const Vol=(e)=>{
+        SetVolume(e.target.value);
+        console.log(e.target.value);
+    }
+    const handleQuill=(e)=>{
+        SetCountry(e.target.value);
+        console.log(e.target.value);
+       
         }
     const  handleSubmit= async ()=>{
-        const config={
-            header:{
-                "Content-Type":"application/json"
-            }
-        }
-        const body={
-            user:user,
-            questionId:props.id,
-            answer:answer
-        }
-        if(props.id&&answer!=""){
-            await axios.post("/api/answers",body,config).then((res)=>{
-                console.log(res.data);
-                alert("Answer added successfully");
+       
+            await axios.post("https://5000-amitpareshm-hackathonsn-bfipn5q18xi.ws-us84.gitpod.io/api/warehouses/edit",{
+                Country:Country,
+                id:props.id,
+                MaxVolume:Volume
+            }).then((res)=>{
+                console.log(res.data,'----');
+                alert("Answer added successfully", JSON.stringify(res.data));
                 window.location.href="/"
             }).catch((err)=>{
                 console.log(err);
             })
-        }
+        console.log("after");
     }
     const [isModalOpen,SetIsModalOpen]=useState(false)
     const [answer,SetAnswer]=useState("");
+    const [Country,SetCountry]=useState("");
+    const [Volume,SetVolume]=useState("");
     const close=(<Close/>);
-
     return(
+        
         <div className="post">
 <div className="post__info">
     <Avatar src={props?.user?.photo}/>
@@ -81,8 +82,8 @@ function Post(props){
             {/* <p>asked by {" "} <span className="name">{user?.userName}</span> {" "} on {" "} <span className="name">{new Date(props.time).toLocaleString()}</span> </p>  */}
         </div>
         <div className="modal__answer">
-            <input placeholder="Max Volume"value={answer}/>
-            <input placeholder="Name" value={answer}/>
+            <input onChange={handleQuill} placeholder="Country" value={Country}/>
+            <input  onChange={Vol} placeholder="Max Volume" value={Volume}/>
             {/* <ReactQuill onChange={handleQuill} placeholder="Enter your answer" value={answer}/> */}
         </div>
         <div className="modal__button">
@@ -109,7 +110,7 @@ function Post(props){
         <MoreHorizOutlined/>
     </div>
 </div>
-<p style={{
+{/* <p style={{
     color:"rgba(0,0,0,0.5)",
     fontSize:"12px",
     fontWeight:"bold",
@@ -136,7 +137,7 @@ function Post(props){
 </div>
 </>
     ))}
-   
+    */}
 
         </div>
     )

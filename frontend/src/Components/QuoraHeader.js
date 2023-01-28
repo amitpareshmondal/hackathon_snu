@@ -34,11 +34,11 @@ function QuoraHeader(){
             }
         }
         const body={
-        user:user,
-       questionName:question,
-       questionUrl:inputUrl
+        email:user.email,
+       Country:question,
+       MaxVolume:inputUrl
         }
-        await axios.post("/api/questions",body,config).then((res)=>{
+        await axios.post("https://5000-amitpareshm-hackathonsn-bfipn5q18xi.ws-us84.gitpod.io/api/warehouses",body,config).then((res)=>{
             console.log(res.data);
             alert(res.data.message);
         }).catch((e)=>{

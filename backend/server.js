@@ -15,28 +15,27 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.set("json spaces", 2);
 //cors
-app.use((req, res, next) => {
-  req.header("Access-Control-Allow-Origin", "*");
-  req.header("Access-Control-Allow-Headers", "*");
-  next();
-});
+app.use(cors({
+  origin: ["https://3000-amitpareshm-hackathonsn-bfipn5q18xi.ws-us84.gitpod.io"],
+  methods: ["GET", "POST", "DELETE"],
+  allowedHeaders: ["Authorization", "Content-Type"],
+  maxAge: 86400,
+}));
 
 //routes
 
 app.use("/api", router);
 
 app.use("/uploads", express.static(path.join(__dirname, "/../uploads")));
-app.use(express.static(path.join(__dirname, "/../frontend/build")));
+// app.use(express.static(path.join(__dirname, "/../frontend/build")));
 
 app.get("*", (req, res) => {
   try {
-    res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`));
+    res.status(404).json("Not found")
   } catch (e) {
     res.send("Oops! unexpected error");
   }
 });
-
-app.use(cors());
 
 //server listening
 app.listen(process.env.PORT || PORT, () => {
