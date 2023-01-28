@@ -6,8 +6,12 @@ const ShipmentsSchema = new mongoose.Schema({
   TentativePrice:Number,
   FinalPrice:Number,
   SenderID:String,
-  reciverID:String,
-  approval:Number,
+  receiverID:String,
+  approval:Boolean,
+  product: {
+    name: String,
+    quantity: Number
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

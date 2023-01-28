@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 app.use("/api", router);
 app.use("/warehouses", warehouseRoutes);
 app.use("/products", ProductsWarehouseRoutes);
+app.use("/shipments", shipmentsRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "/../uploads")));
 app.use(express.static(path.join(__dirname, "/../frontend/build")));
