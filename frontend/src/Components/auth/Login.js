@@ -1,5 +1,6 @@
 import React from "react";
 import "./Login.css";
+import logo from "./warehouse.png";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "./firebase";
 function Login(){
@@ -16,7 +17,7 @@ function Login(){
  return(
     <div className="login-container">
         <div className="login-content">
-            <img src="https://video-public.canva.com/VAD8lt3jPyI/v/ec7205f25c.gif" alt="logo"/>
+            <img src={logo} alt="logo"/>
             <button onClick={handleSubmit} className="btn-login">Login to Continue</button>
         </div>
     </div>

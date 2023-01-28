@@ -69,23 +69,26 @@ function Post(props){
     <p>
       {props.questions}
     </p>
-    <button className="post__btnAnswer" onClick={()=>SetIsModalOpen(true)}>Answer</button>
+    <button className="post__btnAnswer" onClick={()=>SetIsModalOpen(true)}>Edit</button>
     <Modal 
     open={isModalOpen} closeIcon={close} onClose={()=> SetIsModalOpen(false)} closeOnEsc center closeOnOverlayClick={false} styles={{overlay:{
         height:"auto"
     }}}
     >
         <div className="modal__question">
+            {/* In this case it would be Warehouse Name */}
             <h1>{props.questions}</h1>
-            <p>asked by {" "} <span className="name">{user?.userName}</span> {" "} on {" "} <span className="name">{new Date(props.time).toLocaleString()}</span> </p> 
+            {/* <p>asked by {" "} <span className="name">{user?.userName}</span> {" "} on {" "} <span className="name">{new Date(props.time).toLocaleString()}</span> </p>  */}
         </div>
         <div className="modal__answer">
-            <ReactQuill onChange={handleQuill} placeholder="Enter your answer" value={answer}/>
+            <input placeholder="Max Volume"value={answer}/>
+            <input placeholder="Name" value={answer}/>
+            {/* <ReactQuill onChange={handleQuill} placeholder="Enter your answer" value={answer}/> */}
         </div>
         <div className="modal__button">
         <button className="cancle" onClick={()=> SetIsModalOpen(false)}>Cancel</button>
                         <button type="submit" className="add" onClick={handleSubmit} >
-                            Add Answer
+                            Update Warehouse
                         </button>
         </div>
     </Modal>

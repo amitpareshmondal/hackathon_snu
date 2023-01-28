@@ -10,7 +10,7 @@ function Quora(){
 <QuoraHeader/>
 <div className="quora__contents">
     <div className="quora__content">
-        <SideBar/>
+        {/* <SideBar/> */}
         <Feed/>
         <Widget/>
     </div>
