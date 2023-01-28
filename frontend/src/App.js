@@ -7,6 +7,8 @@ import {login,selectUser} from "./feature/userSlice";
 import {getAuth, onAuthStateChanged } from "firebase/auth";
 import { BrowserRouter, Route ,Routes } from "react-router-dom";
 import Shipment from "./Components/Shipment";
+import CheckoutPage from "./Components/Checkout";
+import BuisCheckoutPage from "./Components/Business";
 function App() {
   const auth=getAuth();
   const user = useSelector(selectUser);
@@ -35,7 +37,8 @@ function App() {
   <Routes>
   <Route exact path="/" element= {user ? <Quora/> : <Login/>} />
       <Route exact path="/shipment" element={<Shipment/>} />
-    
+      <Route exact path="/customer" element={<CheckoutPage/>} />
+      <Route exact path="/business" element={<BuisCheckoutPage/>} />
       </Routes>
       
      

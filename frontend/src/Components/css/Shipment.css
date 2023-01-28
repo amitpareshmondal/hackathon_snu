@@ -23,4 +23,7 @@
     box-shadow: 0px 0px 10px #ccc;
     text-align: center;
   }
+  b{
+    text-decoration: none !important ; 
+  }
   

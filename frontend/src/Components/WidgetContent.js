@@ -24,6 +24,7 @@ function WidgetContent(){
                 </div>
             </div>
             </Link>
+            <Link to="">
             <div className="widget__content">
                 <img src={trackshipment} className="img"/>
                 <div className="widget__contentTitle">
@@ -33,6 +34,7 @@ function WidgetContent(){
                     {/* <p>The best mobile app development company</p> */}
                 </div>
             </div>
+            </Link>
             <div className="widget__content">
                 <img src={viewpro} className="img"/>
                 <div className="widget__contentTitle">
