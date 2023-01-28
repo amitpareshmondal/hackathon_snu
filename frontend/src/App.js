@@ -9,6 +9,7 @@ import { BrowserRouter, Route ,Routes } from "react-router-dom";
 import Shipment from "./Components/Shipment";
 import CheckoutPage from "./Components/Checkout";
 import BuisCheckoutPage from "./Components/Business";
+import Orders from "./Components/Orders";
 function App() {
   const auth=getAuth();
   const user = useSelector(selectUser);
@@ -39,6 +40,7 @@ function App() {
       <Route exact path="/shipment" element={<Shipment/>} />
       <Route exact path="/customer" element={<CheckoutPage/>} />
       <Route exact path="/business" element={<BuisCheckoutPage/>} />
+      <Route exact path="/orders" element={<Orders/>} />
       </Routes>
       
      
