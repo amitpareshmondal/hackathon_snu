@@ -3,7 +3,7 @@ import {Avatar} from "@material-ui/core";
 import "./css/QuoraBox.css";
 import {  selectUser } from "../feature/userSlice";
 import { useSelector } from "react-redux";
-function QuoraBox(){
+function QuoraBox(props){
     const user = useSelector(selectUser);
  return(   
  <div className="quoraBox">
@@ -11,7 +11,7 @@ function QuoraBox(){
     {/* <Avatar src={user?.photo}/> */}
 </div>
 <div className="quoraBox__quora">
-    <h2>Warehouses</h2>
+ <h2 >{props.text}</h2>
 </div>
     </div>
 )}

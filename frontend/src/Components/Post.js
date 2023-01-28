@@ -39,7 +39,7 @@ function Post(props){
         }
     const  handleSubmit= async ()=>{
        
-            await axios.post("https://5000-amitpareshm-hackathonsn-bfipn5q18xi.ws-us84.gitpod.io/api/warehouses/edit",{
+            await axios.post("https://api.asaifee.ml/api/warehouses/edit",{
                 Country:Country,
                 id:props.id,
                 MaxVolume:Volume
@@ -61,9 +61,7 @@ function Post(props){
         
         <div className="post">
 <div className="post__info">
-    <Avatar src={props?.user?.photo}/>
-    <h4>{props?.user?.userName}</h4>
-    <small><LastSeen Date={props.time}/></small>
+    <small><Created at Date={props.time}/></small>
 </div>
 <div className="post__body">
     <div className="post__question">
@@ -78,7 +76,7 @@ function Post(props){
     >
         <div className="modal__question">
             {/* In this case it would be Warehouse Name */}
-            <h1>{props.questions}</h1>
+            <h1>Update the Warehouse</h1>
             {/* <p>asked by {" "} <span className="name">{user?.userName}</span> {" "} on {" "} <span className="name">{new Date(props.time).toLocaleString()}</span> </p>  */}
         </div>
         <div className="modal__answer">
@@ -94,9 +92,7 @@ function Post(props){
         </div>
     </Modal>
     </div>
-    {
-        props.source!=="" && <img src={props.source} alt="img"/>
-    }
+  
 </div>
 <div className="post__footer">
     <div className="post__footerAction">

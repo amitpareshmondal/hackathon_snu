@@ -4,25 +4,29 @@ import { items } from './items'; // import the items from a separate file
 import QuoraHeader from './QuoraHeader';
 import axios from 'axios';
 import "./css/check.css";
+import {  selectUser } from "../feature/userSlice";
 const BuisCheckoutPage = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [location, setLocation] = useState('');
+  const [questions,setQuestions]=useState([]);
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
-
+  const user = useSelector(selectUser);
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Add the selected item to the cart
-    //   dispatch({ type: 'ADD_ITEM', payload: { item: selectedItem, quantity } });
-    //   // Make a POST request to submit the data
-    //   await axios.post('/api/checkout', { cart, location });
-      alert('Order placed successfully');
-    } catch (error) {
-      console.error(error);
-      alert('Failed to place order');
-    }
+    await axios.get(`https://5000-amitpareshm-hackathonsn-nn5lss8fogm.ws-us84.gitpod.io/api/business/${user.email}`)
+    .then(async (res)=>{
+        console.log(res.data);
+        const bid = res.data[0]._id
+        console.log(bid)
+        await axios.get(`https://5000-amitpareshm-hackathonsn-nn5lss8fogm.ws-us84.gitpod.io/api/warehouses/${bid}`)
+        .then((res)=>{
+        setQuestions(res.data);
+        console.log(questions);
+    })})
+    .catch((e)=>{
+        console.log(e);
+    })
   }
 
   return (
@@ -30,9 +34,9 @@ const BuisCheckoutPage = () => {
    
     <QuoraHeader/>
     <div className="business-checkout-page">
-      <form onSubmit={handleSubmit} className="business-checkout-form">
+      <form  className="business-checkout-form">
         <label className='business-label'>
-          Select Item:
+          Select:
           <select value={selectedItem} onChange={e => setSelectedItem(e.target.value)} className="business-select">
             <option value="" disabled>Select an item</option>
             {items.map(item => (
@@ -47,21 +51,21 @@ const BuisCheckoutPage = () => {
         </label>
         <br />
         <label className='business-label'>
-          Location:
+          Source:
           <input type="text" value={location} onChange={e => setLocation(e.target.value)}  className="business-input-text"/>
         </label>
         <br />
         <label className='business-label'>
-          Destination:
+          email:
           <input type="text" value={location} onChange={e => setLocation(e.target.value)} className="business-input-text"/>
         </label>
         <br />
         <label className='business-label'>
-          Weight:
+          Destination:
           <input type="text" value={location} onChange={e => setLocation(e.target.value)}className="business-input-text" />
         </label>
         <br />
-        <button type="submit" className='business-button-submit'>Submit</button>
+        <button type="submit" className='business-button-submit' onClick={handleSubmit}>Calculate</button>
       </form>
     </div>
     </>

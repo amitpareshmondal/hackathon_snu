@@ -38,7 +38,7 @@ function QuoraHeader(){
        Country:question,
        MaxVolume:inputUrl
         }
-        await axios.post("https://5000-amitpareshm-hackathonsn-bfipn5q18xi.ws-us84.gitpod.io/api/warehouses",body,config).then((res)=>{
+        await axios.post("https://api.asaifee.ml/api/warehouses",body,config).then((res)=>{
             console.log(res.data);
             alert(res.data.message);
         }).catch((e)=>{
@@ -123,12 +123,7 @@ function QuoraHeader(){
                                 SetInputUrl(e.target.value);
                             }}
                             />
-                            {
-                                inputUrl!=="" &&  <img src={inputUrl} alt="display Images" style={{
-                                    height:"40vh" ,
-                                    objectFit:"contain"
-                                }}/>
-                            }
+                          
                            
                         </div>
                     </div>

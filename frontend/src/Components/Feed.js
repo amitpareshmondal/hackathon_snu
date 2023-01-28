@@ -11,12 +11,12 @@ function Feed(){
     console.log(user);
     useEffect(()=>{
         const questions = async () => {
-            await axios.get(`https://5000-amitpareshm-hackathonsn-bfipn5q18xi.ws-us84.gitpod.io/api/business/${user.email}`)
+            await axios.get(`https://api.asaifee.ml/api/business/${user.email}`)
             .then(async (res)=>{
                 console.log(res.data);
                 const bid = res.data[0]._id
                 console.log(bid)
-                await axios.get(`https://5000-amitpareshm-hackathonsn-bfipn5q18xi.ws-us84.gitpod.io/api/warehouses/${bid}`)
+                await axios.get(`https://api.asaifee.ml/api/warehouses/${bid}`)
                 .then((res)=>{
                 console.log("Amit");
                 console.log(res.data);
@@ -42,8 +42,9 @@ function Feed(){
     if(Questions.length!==0){
         return(
             <div className="feed">
-            <QuoraBox/>
+            <QuoraBox text="Warehouses" />
             {
+                
                 Questions.map((wh,index)=> (<Post key={index} questions={wh.name} time={wh.createdAt} id={wh._id
                 }/>)) 
             }        
@@ -53,8 +54,7 @@ function Feed(){
     else{
         return(
             <>
-            <QuoraBox/>
-            No Warehouses Found
+            <QuoraBox style={{width:"700px"}} text="😢 Sorry No warehouses Found"/>
             </>
         )
     }
