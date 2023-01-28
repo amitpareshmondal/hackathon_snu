@@ -9,7 +9,7 @@
   .box-container:hover{
     cursor:pointer;
   }
-  img{
+  .box > img{
     width: 160px;
     height: 160px;
     position: relative;

@@ -5,6 +5,8 @@ import Login from "./Components/auth/Login";
 import Quora from './Components/Quora';
 import {login,selectUser} from "./feature/userSlice";
 import {getAuth, onAuthStateChanged } from "firebase/auth";
+import { BrowserRouter, Route ,Routes } from "react-router-dom";
+import Shipment from "./Components/Shipment";
 function App() {
   const auth=getAuth();
   const user = useSelector(selectUser);
@@ -25,9 +27,20 @@ function App() {
     });
   }, [dispatch]);
   return (
-    <div className="App">
-      {user ? <Quora/> : <Login/>}
-    </div>
+   <>
+  <BrowserRouter>
+  <div className="App">
+ 
+  </div>
+  <Routes>
+  <Route exact path="/" element= {user ? <Quora/> : <Login/>} />
+      <Route exact path="/shipment" element={<Shipment/>} />
+    
+      </Routes>
+      
+     
+      </BrowserRouter>
+    </>
   );
 }
 

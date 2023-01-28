@@ -8,11 +8,11 @@ function Shipment(){
     return(
         <div>
            <QuoraHeader/>
-           <div class="box-container">
-  <div class="box"><img src={logo}/>
+           <div className="box-container">
+  <div className="box"><img src={logo}/>
   <br/><b >Customer</b>
   </div>
-  <div class="box">
+  <div className="box">
   <img src={business}/>
   <br/><b >Business</b>
   </div>

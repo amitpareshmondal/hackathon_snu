@@ -9,21 +9,21 @@
   top: 140px;
 }
 
-form {
+.checkout-form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-label {
+.checkout-label {
   width: 100%;
   text-align: left;
   margin-bottom: 10px;
 }
 
-select,
-input[type='text'],
-input[type='number'] {
+.checkout-select,
+.checkout-input-number,
+.checkout-input-text {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -33,7 +33,7 @@ input[type='number'] {
   box-sizing: border-box;
 }
 
-button[type='submit'] {
+.checkout-submit {
   width: 100%;
   background-color: #4CAF50;
   color: white;
@@ -44,6 +44,6 @@ button[type='submit'] {
   cursor: pointer;
 }
 
-button[type='submit']:hover {
+.checkout-submit:hover {
   background-color: #45a049;
 }

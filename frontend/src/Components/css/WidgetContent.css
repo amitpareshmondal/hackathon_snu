@@ -18,6 +18,8 @@
 }
 .widget__contentTitle>h5{
     color: rgb(70,68,68);
+    position: relative;
+    top: 8px;
 }
 .widget__contentTitle > p{
     color: gray;
