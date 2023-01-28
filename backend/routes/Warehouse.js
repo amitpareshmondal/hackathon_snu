@@ -1,8 +1,15 @@
 const express = require("express");
-const router = express.Router();
+const warehouse = require("../controllers/warehouseController.js");
+const router = express.Router()
 
-const questionDB = require("../models/Warehouses");
-router.get("/",async(req,res)=>{
-    res.send("Hello")
-})
-module.exports = router;
+//TO GET WAREHOUSE
+router.get("/", warehouse.getWarehouse)
+//TO CREATE WAREHOUSE
+router.post("/", warehouse.createWarehouse)
+//TO EDIT WAREHOUSE
+router.post("/edit", warehouse.editWarehouse)
+// TO EDIT WAREHOUSE
+router.delete("/", warehouse.deleteWarehouse )
+
+
+module.exports = router 

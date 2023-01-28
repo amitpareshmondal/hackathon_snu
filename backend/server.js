@@ -2,12 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-const bodyParser = require("body-parser");
 const PORT = 5000;
 const db = require("./db");
 const router = require("./routes");
-const warehouseRoutes =  require("./routes/WarehouseRoute.js")
-const ProductsWarehouseRoutes =  require("./routes/ProductsWarehouseRoutes.js")
+const warehouseRoutes =  require("./routes/Warehouse.js")
+const ProductsWarehouseRoutes =  require("./routes/Products.js")
 
 
 //database connection
@@ -15,9 +14,9 @@ const ProductsWarehouseRoutes =  require("./routes/ProductsWarehouseRoutes.js")
 db.connect();
 
 //middle ware
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.set("json spaces", 2);
 //cors
 app.use((req, res, next) => {
   req.header("Access-Control-Allow-Origin", "*");
@@ -29,7 +28,7 @@ app.use((req, res, next) => {
 
 app.use("/api", router);
 app.use("/warehouse", warehouseRoutes);
-app.use("/warehouseProducts", ProductsWarehouseRoutes);
+app.use("/product", ProductsWarehouseRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "/../uploads")));
 app.use(express.static(path.join(__dirname, "/../frontend/build")));

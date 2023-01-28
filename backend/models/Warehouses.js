@@ -1,16 +1,14 @@
 const mongoose = require("mongoose");
 
 const WarehouseSchema = new mongoose.Schema({
-  CurrentVolume:Number,
+  CurrentVolume: Number,
   Country: String,
   MaxVolume: Number,
-  diffProducts:[
-    {
-    Products:string,
-  quantity:Number,
-  volume:Number
-
-}],
+  products:[{
+    name: String,
+    quantity: Number,
+    volume: Number
+  }],
   BusinessID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "business"

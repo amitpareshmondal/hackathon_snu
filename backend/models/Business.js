@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const BusinessSchema = new mongoose.Schema({
-  Name: String,
+  name: String,
   email: String,
   warehouses: {
     type: mongoose.Schema.Types.ObjectId,
@@ -14,8 +14,7 @@ const BusinessSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now(),
-  },
-  user: Object,
+  }
 });
 
 module.exports = mongoose.model("business", BusinessSchema);
