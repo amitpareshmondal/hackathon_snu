@@ -1,8 +1,8 @@
-let Shipments= require('../models/Shipments')
+const Shipments= require('../models/Shipments')
 
 
 
-module.exports=  getAllShipment = async (req, res, next)=> {
+const  getAllShipment = async (req, res, next)=> {
     try{        
         await    Shipments
   .find()
@@ -22,7 +22,7 @@ module.exports=  getAllShipment = async (req, res, next)=> {
 
 }
 
-module.exports=  getAllShipmentBusiness = async (req, res, next)=> {
+const  getAllShipmentBusiness = async (req, res, next)=> {
     try{        
         Shipments
   .find({
@@ -44,7 +44,7 @@ module.exports=  getAllShipmentBusiness = async (req, res, next)=> {
 
 }
 
-module.exports= createShipment = async (req, res, next)=> {
+const createShipment = async (req, res, next)=> {
     try{            
         
 let Shipment = new Shipments({
@@ -78,7 +78,7 @@ Shipment.save()
 
 }
 
-module.exports=  editShipmentAdmin  = async (req, res, next)=> {
+const  editShipmentAdmin  = async (req, res, next)=> {
     try{
         Shipments
   .findOneAndUpdate(
@@ -111,7 +111,7 @@ module.exports=  editShipmentAdmin  = async (req, res, next)=> {
 
 
 
-module.exports=  editShipmentbusiness  = async (req, res, next)=> {
+const  editShipmentbusiness  = async (req, res, next)=> {
     try{
         Shipments
   .findOneAndUpdate(
@@ -148,7 +148,7 @@ module.exports=  editShipmentbusiness  = async (req, res, next)=> {
 }
 
 
-module.exports= deleteShipmentbusiness = async (req, res, next)=> {
+const deleteShipmentbusiness = async (req, res, next)=> {
     try{   
         
         Shipments
@@ -172,3 +172,5 @@ module.exports= deleteShipmentbusiness = async (req, res, next)=> {
 
 
 }
+
+module.exports = { getAllShipment, getAllShipmentBusiness, createShipment, editShipmentAdmin, editShipmentbusiness, deleteShipmentbusiness }

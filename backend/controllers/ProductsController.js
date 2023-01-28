@@ -1,56 +1,77 @@
 const warehouse = require("../models/Warehouses");
+const business = require("../models/Business");
+const { current } = require("@reduxjs/toolkit");
 
 const getAllProducts = async (req, res, next) => {
 	try {
-		warehouse.aggregate([
+		business.aggregate([
 			{
 				$lookup: {
-					from: "business", //collection to join
+					from: "warehouses", //collection to join
 					localField: "_id", //field from input document
-					foreignField: "warehouses",
+					foreignField: "BusinessID",
 					as: "allWarehouses", //output array field
 				},
 			},
 		])
-		.exec()
-		.then(docs => res.status(200).json(docs))
-		.catch(err => console.log(err))
+			.exec()
+			.then(docs => {
+				const warehouses = docs[0].allWarehouses
+				const products = warehouses.reduce((prev, curr) => prev.products.concat(prev.products, curr.products))
+				res.status(200).json(products.products)
+			})
+			.catch(err => console.log(err))
 	} catch (err) {
-			console.log("we in controller error", err)
+		console.log("we in controller error", err)
 	}
 }
 
 const addProducts = async (req, res, next) => {
 	try {
-		res.status(200).send("Warehouse has been created!")
+    warehouse
+      .findOneAndUpdate({_id: req.body.id}, {
+				$push: { products: req.body.products },
+				$inc: { CurrentVolume: req.body.products.reduce((acc, curr) => acc + curr.volume, initialValue=0) }
+        }, {
+          new: true,                       // return updated doc
+          runValidators: true              // validate before update
+        })
+      .then(doc => res.status(200).json(doc))
+      .catch(err => console.error(err))
 	} catch (err) {
 		console.log("we in controller error", err)
-
 	}
-
-
 }
 
 const editProducts = async (req, res, next) => {
 	try {
-		res.status(200).send("user has been created!")
+    warehouse
+      .findOneAndUpdate({_id: req.body.id, 'products.name': req.body.name}, {
+				'$set': { 'products.$.quantity': req.body.quantity },
+        }, {
+          new: true,                       // return updated doc
+          runValidators: true              // validate before update
+        })
+      .then(doc => res.status(200).json(doc))
+      .catch(err => console.error(err))
 	} catch (err) {
 		console.log("we in controller error", err)
-
 	}
-
-
 }
 
 const deleteProducts = async (req, res, next) => {
 	try {
-		res.status(200).send("user has been created!")
+    warehouse
+      .updateOne({_id: req.body.id}, {
+				$pull: {
+					products: {name: req.body.name},
+				}
+			}, { safe: true, multi:true })
+      .then(response => res.status(200).send(response))
+      .catch(err => console.error(err))
 	} catch (err) {
 		console.log("we in controller error", err)
-
 	}
-
-
 }
 
 module.exports = { getAllProducts, addProducts, editProducts, deleteProducts }
