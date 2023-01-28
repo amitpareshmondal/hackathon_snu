@@ -1,4 +1,5 @@
 const Shipments = require('../models/Shipments')
+const Warehouses = require('../models/Warehouses')
 
 const getAllShipment = async (req, res, next) => {
   try {
@@ -31,11 +32,10 @@ const createShipment = async (req, res, next) => {
       FinalPrice: 0,
       SenderID: req.body.SenderID,
       receiverID: req.body.receiverID,
+      sourceWarehouseID: req.body.sourceWarehouseID,
+      destWarehouseID: req.body.destWarehouseID,
       approval: false,
-      product: {
-        name: req.body.productName,
-        quantity: req.body.productQuantity
-      }
+      products: req.body.products[0]
     })
       .then(doc => res.status(200).json(doc))
       .catch(err => console.error(err))
@@ -46,14 +46,34 @@ const createShipment = async (req, res, next) => {
 
 const editShipmentAdmin = async (req, res, next) => {
   try {
-    Shipments
-      .findOneAndUpdate({ _id: req.params.shipmentID}, {
+    const approved = await Shipments.findOneAndUpdate({ _id: req.params.shipmentID}, {
           FinalPrice: req.body.price,
-          approval: req.body.approval,   // field:values to update
+          approval: req.body.approval,
         }, {
           new: true,                       // return updated doc
           runValidators: true              // validate before update
         })
+    
+    const shipment = await Shipments.findOne({_id: req.params.shipmentID})
+    console.log(shipment)
+    const sent = await Warehouses.findOneAndUpdate({
+      _id: shipment.sourceWarehouseID,
+      'products.name': shipment.products[0].name
+      }, {
+        $inc: { 'products.$.quantity': -shipment.products[0].quantity},
+      }, {
+        new: true,                       // return updated doc
+        runValidators: true              // validate before update
+      }).then(doc => doc).catch(err => err)
+    
+    console.log("Sent: ", sent)
+    await Warehouses.findOneAndUpdate({_id: shipment.destWarehouseID}, {
+      $push: { products: shipment.products },
+      $inc: { CurrentVolume: shipment.products[0].volume }
+      }, {
+        new: true,                       // return updated doc
+        runValidators: true              // validate before update
+      })
       .then(doc => res.status(200).json(doc))
       .catch(err => console.error(err))
   } catch (err) {

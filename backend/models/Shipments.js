@@ -8,10 +8,13 @@ const ShipmentsSchema = new mongoose.Schema({
   SenderID:String,
   receiverID:String,
   approval:Boolean,
-  product: {
+  sourceWarehouseID: String,
+  destWarehouseID: String,
+  products: [{
     name: String,
-    quantity: Number
-  },
+    quantity: Number,
+    volume: Number
+  }],
   createdAt: {
     type: Date,
     default: Date.now(),
