@@ -61,19 +61,26 @@ function Post(props){
         
         <div className="post">
 <div className="post__info">
-    <small><Created at Date={props.time}/></small>
+    {/* <small><Created at Date={props.time}/></small> */}
 </div>
 <div className="post__body">
     <div className="post__question">
     <p>
       {props.questions}
     </p>
+  <br/>
+  <br/>
+   
     <button className="post__btnAnswer" onClick={()=>SetIsModalOpen(true)}>Edit</button>
+    <p>
+      
+    </p>
     <Modal 
     open={isModalOpen} closeIcon={close} onClose={()=> SetIsModalOpen(false)} closeOnEsc center closeOnOverlayClick={false} styles={{overlay:{
         height:"auto"
     }}}
     >
+       
         <div className="modal__question">
             {/* In this case it would be Warehouse Name */}
             <h1>Update the Warehouse</h1>
@@ -95,7 +102,7 @@ function Post(props){
   
 </div>
 <div className="post__footer">
-    <div className="post__footerAction">
+    {/* <div className="post__footerAction">
         <ArrowUpwardOutlined/>
         <ArrowDownwardOutlined/>
     </div>
@@ -104,7 +111,11 @@ function Post(props){
     <div className="post__footerLeft">
         <ShareOutlined/>
         <MoreHorizOutlined/>
-    </div>
+    </div> */}
+    <b></b>
+      Max Volume {props.Volume}
+      <br/>
+   Create At : {props.date}
 </div>
 {/* <p style={{
     color:"rgba(0,0,0,0.5)",
